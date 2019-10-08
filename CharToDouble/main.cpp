@@ -49,6 +49,6 @@ double CharToDouble(char *value)
 		}
 	}
 
-	return hasampersand ? (x / denom) * fraction : x * (double)fraction;
+	return (x / denom) * fraction;
 }
 
