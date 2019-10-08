@@ -15,3 +15,40 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
+double CharToDouble(char *value)
+{
+	double x = 0.0;
+	char *ptr = value;
+	int fraction = 1;
+	bool hasampersand = false;
+	int round = 0;
+	int denom = 1;
+	while (*ptr != '\0')
+	{
+		if (round > 0 && *ptr == '.')
+		{
+			hasampersand = true;
+		}
+
+		if (*ptr == '-')
+		{
+			fraction = -1;
+		}
+
+		if (*ptr < '0' || *ptr > '9')
+		{
+			++ptr;
+			continue;
+		}
+		x = (x * 10) + (*ptr - '0');
+		++ptr;
+		++round;
+		if (hasampersand)
+		{
+			denom *= 10;
+		}
+	}
+
+	return hasampersand ? (x / denom) * fraction : x * (double)fraction;
+}
+
